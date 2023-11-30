@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Tickepedido" pageWidth="400" pageHeight="680" columnWidth="360" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8964b488-cbf7-4066-8bbe-a9ea9ee15d4f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="restaurante"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="IDOrden" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT l.orden_idorden,  l.alimentos_menuid,  l.cantidad, precio, nombre, l.cantidad*precio AS total
+FROM listaalimentos l, alimentos, orden
+WHERE menuid = alimentos_menuid
+AND idorden = orden_idorden
+AND l.orden_idorden =  $P{IDOrden}]]>
+	</queryString>
+	<field name="orden_idorden" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="orden_idorden"/>
+		<property name="com.jaspersoft.studio.field.label" value="orden_idorden"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="listaalimentos"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="alimentos_menuid" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="alimentos_menuid"/>
+		<property name="com.jaspersoft.studio.field.label" value="alimentos_menuid"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="listaalimentos"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="cantidad"/>
+		<property name="com.jaspersoft.studio.field.label" value="cantidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="listaalimentos"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.name" value="precio"/>
+		<property name="com.jaspersoft.studio.field.label" value="precio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="alimentos"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="alimentos"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total"/>
+		<property name="com.jaspersoft.studio.field.label" value="total"/>
+	</field>
+	<variable name="total1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="104" splitType="Stretch">
+			<staticText>
+				<reportElement x="-11" y="50" width="100" height="30" uuid="781b5f90-d028-4860-8e24-2881c230e470">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f651de76-0f66-4243-9c6f-bb4fa50c4f83"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Folio de orden:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="30" width="86" height="19" uuid="b9ce86e1-e676-4dee-84d2-a0ddcc241342"/>
+				<text><![CDATA[Fecha de compra:]]></text>
+			</staticText>
+			<textField pattern="HH:mm">
+				<reportElement x="320" y="50" width="56" height="30" uuid="fa4e93db-00af-4dd4-952a-51b4373a19b2"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="223" y="50" width="100" height="30" uuid="ea3a4a0e-3b04-4cdc-91b8-461686925d45"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="50" width="30" height="30" uuid="4dfa7f65-6840-4c2c-be32-8b2de4aec958"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{orden_idorden}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="120" y="0" width="60" height="32" uuid="5911d2ac-b9dc-4bbc-8cd7-bfc9a424c426">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="21a3307f-688a-4359-b1fb-4743685d3385"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="0" width="50" height="32" uuid="0ceffbbb-4520-490a-a606-3a862796e49c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0881b4c4-8b6f-497d-922c-d622e19ccb08"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-10" y="3" width="110" height="30" uuid="74503048-86dc-45b8-b5ab-05a9e5a490ab">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="029e55fe-fbbf-4018-95a5-d09ebe0523a4"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Alimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="0" width="100" height="32" uuid="5c485273-02bd-435e-87b0-d784da73553d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0881b4c4-8b6f-497d-922c-d622e19ccb08"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="56" splitType="Stretch">
+			<textField>
+				<reportElement x="120" y="10" width="60" height="30" uuid="38fe661e-fee0-4dd8-a9c9-21f533b43e45">
+					<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Restaurante"/>
+					<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+					<property name="com.jaspersoft.studio.unit." value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="210" y="10" width="50" height="32" uuid="14bc9a35-2a1f-4dd8-a704-46f07ad67423">
+					<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Restaurante"/>
+					<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+					<property name="com.jaspersoft.studio.unit." value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-10" y="10" width="110" height="30" uuid="18ba4d2d-2f0c-4751-8b02-d562dffe0235">
+					<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Restaurante"/>
+					<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+					<property name="com.jaspersoft.studio.unit." value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="270" y="10" width="100" height="30" uuid="4ef4635b-5584-405d-b0f2-0487cc3b9fc8">
+					<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Restaurante"/>
+					<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+					<property name="com.jaspersoft.studio.unit." value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="50" splitType="Stretch">
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="270" y="10" width="99" height="30" uuid="8cfb646a-8280-40fd-9c8f-2ba469501902"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="210" y="10" width="60" height="30" uuid="5ce53baa-674f-4365-ad4d-8224359fa7e0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0881b4c4-8b6f-497d-922c-d622e19ccb08"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
